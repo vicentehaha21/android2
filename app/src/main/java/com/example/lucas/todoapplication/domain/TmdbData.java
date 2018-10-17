@@ -1,5 +1,6 @@
 package com.example.lucas.todoapplication.domain;
 
+import com.example.lucas.todoapplication.integration.tmdb.response.TmdbMovieResponse;
 import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResponse;
 import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResultResponse;
 import com.example.lucas.todoapplication.util.GlobalVars;
@@ -20,7 +21,7 @@ public class TmdbData extends ResponseData {
     public TmdbData(Integer id, String title, String posterPath, String overview, String releaseDate) {
         this.id = id;
         this.title = title;
-        this.posterPath = GlobalVars.IMG_SERVER_PATH.concat(posterPath);
+        this.posterPath = posterPath != null ? GlobalVars.IMG_SERVER_PATH.concat(posterPath) : null;
         this.overview = overview;
         this.releaseDate = releaseDate;
     }
@@ -37,10 +38,10 @@ public class TmdbData extends ResponseData {
         return dataList;
     }
 
-    public static ResponseData from(TmdbResultResponse result) {
-        TmdbData data = new TmdbData(result.getId(), result.getTitle(), result.getPosterPath(), result.getOverview(), result.getReleaseDate());
-        data.setVoteAverage(result.getVoteAverage());
-        data.setVoteCount(result.getVoteCount());
+    public static ResponseData from(TmdbMovieResponse response) {
+        TmdbData data = new TmdbData(response.getId(), response.getTitle(), response.getPosterPath(), response.getOverview(), response.getReleaseDate());
+        data.setVoteAverage(response.getVoteAverage());
+        data.setVoteCount(response.getVoteCount());
         return data;
     }
 

@@ -74,6 +74,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements ResponseC
 
         RatingBar ratingBar = findViewById(R.id.ratingBar);
         ratingBar.setMax(5);
-        new DownloadImageService(findViewById(R.id.movieImage)).execute(data.getPosterPath());
+        if(data.getPosterPath() != null)
+            new DownloadImageService(findViewById(R.id.movieImage)).execute(data.getPosterPath());
     }
 }

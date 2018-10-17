@@ -8,6 +8,7 @@ import com.example.lucas.todoapplication.integration.ResponseCallback;
 import com.example.lucas.todoapplication.integration.omdb.OmdbIntegrationService;
 import com.example.lucas.todoapplication.integration.omdb.response.OmdbResponse;
 import com.example.lucas.todoapplication.integration.tmdb.TmdbIntegrationService;
+import com.example.lucas.todoapplication.integration.tmdb.response.TmdbMovieResponse;
 import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResponse;
 import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResultResponse;
 
@@ -38,14 +39,14 @@ public class TmdbService {
     }
 
     public void findById(Integer id) {
-        TmdbIntegrationService.getInstance().findById(id).enqueue(new Callback<TmdbResultResponse>() {
+        TmdbIntegrationService.getInstance().findById(id).enqueue(new Callback<TmdbMovieResponse>() {
             @Override
-            public void onResponse(@NonNull Call<TmdbResultResponse> call, @NonNull Response<TmdbResultResponse> response) {
+            public void onResponse(@NonNull Call<TmdbMovieResponse> call, @NonNull Response<TmdbMovieResponse> response) {
                 responseCallback.onSuccess(TmdbData.from(response.body()));
             }
 
             @Override
-            public void onFailure(@NonNull Call<TmdbResultResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<TmdbMovieResponse> call, @NonNull Throwable t) {
                 responseCallback.onError(t);
             }
 

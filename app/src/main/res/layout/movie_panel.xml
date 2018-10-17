@@ -4,90 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="15dp"
+    android:layout_marginTop="3dp"
     android:layout_marginBottom="5dp"
     android:background="@color/black">
 
-    <TextView
-        android:id="@+id/movieTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="8dp"
-        android:textAlignment="center"
-        android:fontFamily="sans-serif"
-        android:textSize="26sp"
-        tools:text="First Blood" />
-
-    <RelativeLayout android:layout_height="wrap_content"
+    <com.example.lucas.todoapplication.component.MovieSearch
         android:layout_width="wrap_content"
-        android:layout_below="@+id/movieTitle"
-        android:background="@color/dark_black"
-        android:padding="5dp">
+        android:layout_height="wrap_content"
+        android:id="@+id/moviesSearch"/>
 
-        <LinearLayout android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/moviePoster">
+    <ScrollView android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@id/moviesSearch">
+        <RelativeLayout android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
 
-            <ImageView
-                android:id="@+id/movieImage"
-                android:layout_width="187dp"
-                android:layout_height="280dp"
-                android:contentDescription="@string/app_name"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintTop_toBottomOf="@+id/movieTitle"
-                tools:src="@drawable/stalone"/>
+            <LinearLayout android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/moviePoster"
+                android:background="@color/dark_black">
 
-            <RatingBar
-                android:id="@+id/ratingBar"
-                style="?android:attr/ratingBarStyleSmall"
+                <ImageView
+                    android:id="@+id/movieImage"
+                    android:layout_width="280dp"
+                    android:layout_height="380dp"
+                    android:background="@color/dark_black"
+                    android:contentDescription="@string/app_name"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintTop_toBottomOf="@+id/movieTitle"
+                    android:layout_gravity="center"
+                    tools:src="@drawable/stalone"/>
+
+                <TextView
+                    android:id="@+id/movieTitle"
+                    android:background="@color/dark_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="8dp"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif"
+                    android:textSize="26sp"
+                    tools:text="First Blood" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.1"
+                    tools:rating="3.9"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/movieYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:isIndicator="true"
-                android:numStars="5"
-                android:stepSize="0.1"
-                tools:rating="3.9"
-                android:layout_gravity="center"/>
+                android:layout_marginStart="15dp"
+                android:layout_below="@id/moviePoster"
+                tools:text="1982"/>
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/movieGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/movieYear"
+                android:layout_below="@id/moviePoster"
+                tools:text="Action, Adventure"/>
 
-        <TextView
-            android:id="@+id/movieYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@id/moviePoster"
-            tools:text="1982"/>
+            <View
+                android:id="@+id/divider_1"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="15dp"
+                android:layout_height="1dp"
+                android:layout_below="@id/movieGenre"
+                android:layout_toEndOf="@id/moviePoster"/>
 
-        <TextView
-            android:id="@+id/movieGenre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@id/movieYear"
-            tools:text="Action, Adventure"/>
-
-        <View
-            android:id="@+id/divider_1"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginStart="15dp"
-            android:layout_height="1dp"
-            android:layout_below="@id/movieGenre"
-            android:layout_toEndOf="@id/moviePoster"/>
-
-        <TextView
-            android:id="@+id/moviePlot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@id/moviePoster"
-            android:textColor="@color/grey"
-            android:layout_below="@id/divider_1"
-            tools:text="Former Green Beret John Rambo is pursued into the mountains surrounding a small town by a tyrannical sheriff and his deputies, forcing him to survive using his combat skills."/>
-
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/moviePlot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:textColor="@color/grey"
+                android:layout_below="@id/divider_1"
+                tools:text="Former Green Beret John Rambo is pursued into the mountains surrounding a small town by a tyrannical sheriff and his deputies, forcing him to survive using his combat skills."/>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

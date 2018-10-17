@@ -9,7 +9,8 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:layout_toStartOf="@id/searchButton"
-            android:textColor="@color/grey"/>
+            android:textColor="@color/grey">
+        </EditText>
 
         <ImageButton
             android:id="@+id/searchButton"
