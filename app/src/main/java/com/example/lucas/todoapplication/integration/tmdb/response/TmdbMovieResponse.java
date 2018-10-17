@@ -1,7 +1,10 @@
 package com.example.lucas.todoapplication.integration.tmdb.response;
 
+import com.example.lucas.todoapplication.util.DateDeserializer;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.List;
 
 public class TmdbMovieResponse {
@@ -43,7 +46,8 @@ public class TmdbMovieResponse {
     private String posterPath;
 
     @SerializedName("release_date")
-    private String releaseDate;
+    @JsonAdapter(DateDeserializer.class)
+    private Date releaseDate;
 
     @SerializedName("runtime")
     private Integer runtime;
@@ -78,7 +82,7 @@ public class TmdbMovieResponse {
         return posterPath;
     }
 
-    public String getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 

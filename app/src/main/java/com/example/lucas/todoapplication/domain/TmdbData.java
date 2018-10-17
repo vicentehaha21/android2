@@ -6,6 +6,7 @@ import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResultRes
 import com.example.lucas.todoapplication.util.GlobalVars;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TmdbData extends ResponseData {
@@ -16,22 +17,28 @@ public class TmdbData extends ResponseData {
     private String title;
     private String posterPath;
     private String overview;
-    private String releaseDate;
+    private Date releaseDate;
+    private List<GenreData> genres;
 
-    public TmdbData(Integer id, String title, String posterPath, String overview, String releaseDate) {
+    private TmdbData(Integer id, String title, String posterPath, String overview, Date releaseDate) {
         this.id = id;
         this.title = title;
-        this.posterPath = posterPath != null ? GlobalVars.IMG_SERVER_PATH.concat(posterPath) : null;
+        this.posterPath = posterPath;
         this.overview = overview;
         this.releaseDate = releaseDate;
+    }
+
+    public TmdbData(Integer id, String title, String posterPath, String overview) {
+        this.id = id;
+        this.title = title;
+        this.posterPath = posterPath;
+        this.overview = overview;
     }
 
     public static List from(TmdbResponse response) {
         List<TmdbData> dataList = new ArrayList<>();
         for (TmdbResultResponse result : response.getResults()) {
-            TmdbData data = new TmdbData(result.getId(), result.getTitle(), result.getPosterPath(), result.getOverview(), result.getReleaseDate());
-            data.setVoteAverage(result.getVoteAverage());
-            data.setVoteCount(result.getVoteCount());
+            TmdbData data = new TmdbData(result.getId(), result.getTitle(), result.getPosterPath(), result.getOverview());
             dataList.add(data);
         }
 
@@ -42,6 +49,7 @@ public class TmdbData extends ResponseData {
         TmdbData data = new TmdbData(response.getId(), response.getTitle(), response.getPosterPath(), response.getOverview(), response.getReleaseDate());
         data.setVoteAverage(response.getVoteAverage());
         data.setVoteCount(response.getVoteCount());
+        data.setGenres(GenreData.from(response.getGenres()));
         return data;
     }
 
@@ -53,51 +61,59 @@ public class TmdbData extends ResponseData {
         return id;
     }
 
-    public Integer getVoteCount() {
-        return voteCount;
-    }
-
     public Double getVoteAverage() {
         return voteAverage;
-    }
-
-    public String getPosterPath() {
-        return posterPath;
     }
 
     public String getOverview() {
         return overview;
     }
 
-    public String getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setId(Integer id) {
+    public List<GenreData> getGenres() {
+        return genres;
+    }
+
+    public String getSmallPosterPath() {
+        return String.format(GlobalVars.IMG_SERVER_PATH, GlobalVars.TMDB_IMG_SMALL, posterPath);
+    }
+
+    public String getMediumPosterPath() {
+        return String.format(GlobalVars.IMG_SERVER_PATH, GlobalVars.TMDB_IMG_MEDIUM, posterPath);
+    }
+
+    public String getOriginalPosterPath() {
+        return String.format(GlobalVars.IMG_SERVER_PATH, GlobalVars.TMDB_IMG_ORIGINAL, posterPath);
+    }
+
+    public Boolean hasPoster() {
+        return this.posterPath != null;
+    }
+
+    public String getGenresAsString() {
+        return genres.toString().replaceAll("\\[|\\]", "");
+    }
+
+    private void setGenres(List<GenreData> genres) {
+        this.genres = genres;
+    }
+
+    private void setId(Integer id) {
         this.id = id;
     }
 
-    public void setVoteCount(Integer voteCount) {
+    private void setVoteCount(Integer voteCount) {
         this.voteCount = voteCount;
     }
 
-    public void setVoteAverage(Double voteAverage) {
+    private void setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
     }
 
-    public void setTitle(String title) {
+    private void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
-
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
     }
 }

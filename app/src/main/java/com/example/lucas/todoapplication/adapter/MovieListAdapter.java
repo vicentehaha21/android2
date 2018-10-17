@@ -42,8 +42,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         TmdbData data = dataSet.get(i);
         holder.movieOverview.setText(data.getOverview());
         holder.movieTitle.setText(data.getTitle());
-        if (data.getPosterPath() != null)
-            new DownloadImageService(holder.movieImage).execute(data.getPosterPath());
+        holder.movieImage.setVisibility(View.INVISIBLE);
+        if (data.hasPoster()) {
+            new DownloadImageService(holder.movieImage).execute(data.getSmallPosterPath());
+        }
     }
 
     @Override

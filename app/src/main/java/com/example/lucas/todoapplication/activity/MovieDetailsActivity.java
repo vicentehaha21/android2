@@ -2,10 +2,10 @@ package com.example.lucas.todoapplication.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -18,6 +18,8 @@ import com.example.lucas.todoapplication.service.DownloadImageService;
 import com.example.lucas.todoapplication.service.TmdbService;
 import com.example.lucas.todoapplication.util.DialogUtils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class MovieDetailsActivity extends AppCompatActivity implements ResponseCallback {
@@ -67,14 +69,18 @@ public class MovieDetailsActivity extends AppCompatActivity implements ResponseC
     }
 
     private void renderizeSuccessResponse(TmdbData data) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String releaseDate = format.format(data.getReleaseDate());
+
         ((TextView) findViewById(R.id.movieTitle)).setText(data.getTitle());
         ((TextView) findViewById(R.id.moviePlot)).setText(data.getOverview());
-        ((TextView) findViewById(R.id.movieYear)).setText(data.getReleaseDate());
-        ((TextView) findViewById(R.id.movieGenre)).setText(data.getVoteAverage().toString());
+        ((TextView) findViewById(R.id.movieYear)).setText(releaseDate);
+        ((TextView) findViewById(R.id.movieGenre)).setText(data.getGenresAsString());
+        ((RatingBar) findViewById(R.id.ratingBar)).setRating(data.getVoteAverage().floatValue() * 0.5F);
 
-        RatingBar ratingBar = findViewById(R.id.ratingBar);
-        ratingBar.setMax(5);
-        if(data.getPosterPath() != null)
-            new DownloadImageService(findViewById(R.id.movieImage)).execute(data.getPosterPath());
+        ImageView imgView = findViewById(R.id.movieImage);
+        imgView.setVisibility(View.GONE);
+        if (data.hasPoster())
+            new DownloadImageService(imgView).execute(data.getMediumPosterPath());
     }
 }

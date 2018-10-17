@@ -2,20 +2,14 @@ package com.example.lucas.todoapplication.component;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.os.Bundle;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.example.lucas.todoapplication.R;
-import com.example.lucas.todoapplication.activity.MovieDetailsActivity;
 import com.example.lucas.todoapplication.activity.MovieListActivity;
 import com.example.lucas.todoapplication.domain.ResponseData;
-import com.example.lucas.todoapplication.domain.TmdbData;
 import com.example.lucas.todoapplication.integration.ResponseCallback;
 import com.example.lucas.todoapplication.service.TmdbService;
 
@@ -52,8 +46,10 @@ public class MovieSearch extends RelativeLayout implements ResponseCallback {
     }
 
     private void search(String title) {
-        TmdbService tmdbService = new TmdbService(this);
-        tmdbService.findByName(title);
+        if(!title.isEmpty()) {
+            TmdbService tmdbService = new TmdbService(this);
+            tmdbService.findByName(title);
+        }
     }
 
     @Override
@@ -63,12 +59,9 @@ public class MovieSearch extends RelativeLayout implements ResponseCallback {
 
     @Override
     public void onSuccess(List<ResponseData> movies) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("movies", new ArrayList<>(movies));
         Intent intent = new Intent(mContext, MovieListActivity.class);
         intent.putExtra("movies", new ArrayList<>(movies));
         mContext.startActivity(intent);
-//        RelativeLayout.inflate(getContext(), R.layout.movie_list, this);
     }
 
     @Override
