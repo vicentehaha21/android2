@@ -1,13 +1,23 @@
 package com.example.lucas.todoapplication.integration;
 
-import com.example.lucas.todoapplication.domain.ResponseData;
+import com.example.lucas.todoapplication.domain.ErrorData;
 
-import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public interface ResponseCallback {
-    void onSuccess(ResponseData data);
+public abstract class ResponseCallback<T> implements Callback<T>, KotlinResponseInterface<T> {
 
-    void onSuccess(List<ResponseData> data);
+    @Override
+    public void onResponse(Call<T> call, Response<T> response) {
+        if (response.isSuccessful())
+            onSuccess(response.body());
+        else
+            onError(new ErrorData("Resposta inesperada"));
+    }
 
-    void onError(Throwable e);
+    @Override
+    public void onFailure(Call<T> call, Throwable t) {
+        onError(new ErrorData("Erro de integração"));
+    }
 }

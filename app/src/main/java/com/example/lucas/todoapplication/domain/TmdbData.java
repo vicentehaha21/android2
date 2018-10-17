@@ -45,7 +45,7 @@ public class TmdbData extends ResponseData {
         return dataList;
     }
 
-    public static ResponseData from(TmdbMovieResponse response) {
+    public static TmdbData from(TmdbMovieResponse response) {
         TmdbData data = new TmdbData(response.getId(), response.getTitle(), response.getPosterPath(), response.getOverview(), response.getReleaseDate());
         data.setVoteAverage(response.getVoteAverage());
         data.setVoteCount(response.getVoteCount());

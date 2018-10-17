@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.lucas.todoapplication.R;
 import com.example.lucas.todoapplication.domain.TmdbData;
-import com.example.lucas.todoapplication.service.DownloadImageService;
+import com.example.lucas.todoapplication.util.ImageDownloader;
 
 import java.util.ArrayList;
 
@@ -44,7 +44,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         holder.movieTitle.setText(data.getTitle());
         holder.movieImage.setVisibility(View.INVISIBLE);
         if (data.hasPoster()) {
-            new DownloadImageService(holder.movieImage).execute(data.getSmallPosterPath());
+            new ImageDownloader(holder.movieImage).execute(data.getSmallPosterPath());
         }
     }
 

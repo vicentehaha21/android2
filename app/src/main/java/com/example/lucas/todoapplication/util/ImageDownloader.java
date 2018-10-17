@@ -1,4 +1,4 @@
-package com.example.lucas.todoapplication.service;
+package com.example.lucas.todoapplication.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,10 +9,10 @@ import android.widget.ImageView;
 
 import java.io.InputStream;
 
-public class DownloadImageService extends AsyncTask<String, Void, Bitmap> {
-    private ImageView bmImage;
+public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
+    private final ImageView bmImage;
 
-    public DownloadImageService(ImageView bmImage) {
+    public ImageDownloader(ImageView bmImage) {
         this.bmImage = bmImage;
     }
 

@@ -2,7 +2,6 @@ package com.example.lucas.todoapplication.integration.tmdb;
 
 import com.example.lucas.todoapplication.integration.tmdb.response.TmdbMovieResponse;
 import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResponse;
-import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResultResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -10,20 +10,16 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.lucas.todoapplication.R;
-import com.example.lucas.todoapplication.domain.OmdbData;
-import com.example.lucas.todoapplication.domain.ResponseData;
+import com.example.lucas.todoapplication.contract.MovieDetailsContract;
 import com.example.lucas.todoapplication.domain.TmdbData;
-import com.example.lucas.todoapplication.integration.ResponseCallback;
-import com.example.lucas.todoapplication.service.DownloadImageService;
-import com.example.lucas.todoapplication.service.TmdbService;
+import com.example.lucas.todoapplication.presenter.TmdbMovieDetailPresenter;
 import com.example.lucas.todoapplication.util.DialogUtils;
+import com.example.lucas.todoapplication.util.ImageDownloader;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
-public class MovieDetailsActivity extends AppCompatActivity implements ResponseCallback {
-    private OmdbData data;
+public class MovieDetailsActivity extends AppCompatActivity implements MovieDetailsContract.View {
     private Integer movieId;
 
     @Override
@@ -46,26 +42,30 @@ public class MovieDetailsActivity extends AppCompatActivity implements ResponseC
 
     private void init() {
         if (movieId != null) {
-            TmdbService tmdbService = new TmdbService(this);
-            tmdbService.findById(movieId);
+            TmdbMovieDetailPresenter presenter = new TmdbMovieDetailPresenter(this);
+            presenter.findByTitle(movieId);
         } else {
             DialogUtils.errorDialog(this);
         }
     }
 
     @Override
-    public void onSuccess(ResponseData data) {
-        renderizeSuccessResponse((TmdbData) data);
+    public void setMovie(TmdbData movie) {
+        renderizeSuccessResponse(movie);
     }
 
     @Override
-    public void onSuccess(List data) {
-
-    }
-
-    @Override
-    public void onError(Throwable e) {
+    public void showErrorMessage(String errorMessage) {
         DialogUtils.errorDialog(this);
+    }
+
+    @Override
+    public void showLoading() {
+    }
+
+    @Override
+    public void hideLoading() {
+
     }
 
     private void renderizeSuccessResponse(TmdbData data) {
@@ -81,6 +81,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements ResponseC
         ImageView imgView = findViewById(R.id.movieImage);
         imgView.setVisibility(View.GONE);
         if (data.hasPoster())
-            new DownloadImageService(imgView).execute(data.getMediumPosterPath());
+            new ImageDownloader(imgView).execute(data.getMediumPosterPath());
     }
 }
