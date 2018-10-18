@@ -1,15 +1,18 @@
 package com.example.lucas.todoapplication;
 
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
-import com.example.lucas.todoapplication.domain.ResponseData;
-import com.example.lucas.todoapplication.integration.ResponseCallback;
+import com.example.lucas.todoapplication.domain.TmdbData;
+import com.example.lucas.todoapplication.viewmodel.TopRatedMoviesViewModel;
 
-import java.util.List;
+import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements ResponseCallback {
+public class MainActivity extends AppCompatActivity {
+
+    @Inject
+    TopRatedMoviesViewModel topRatedMoviesViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,25 +22,10 @@ public class MainActivity extends AppCompatActivity implements ResponseCallback 
     }
 
     private void init() {
-    }
-
-    @Override
-    public void onSuccess(ResponseData data) {
-
-    }
-
-    @Override
-    public void onSuccess(List data) {
-
-    }
-
-    @Override
-    public void onError(Throwable e) {
-        new AlertDialog.Builder(this)
-                .setTitle("Ops")
-                .setMessage("Deu um erro")
-                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-                .create()
-                .show();
+        topRatedMoviesViewModel.getTopRatedMovies().subscribe(items -> {
+            for (TmdbData item : items) {
+                Log.i("LogX", item.getTitle());
+            }
+        });
     }
 }

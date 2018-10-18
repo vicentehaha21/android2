@@ -1,18 +1,18 @@
 package com.example.lucas.todoapplication.presenter;
 
-import com.example.lucas.todoapplication.contract.MovieListContract;
+import com.example.lucas.todoapplication.contract.MovieSearchContract;
 import com.example.lucas.todoapplication.domain.ErrorData;
 import com.example.lucas.todoapplication.domain.TmdbData;
 import com.example.lucas.todoapplication.integration.ResponseCallback;
 import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResponse;
 import com.example.lucas.todoapplication.repository.TmdbRepository;
 
-public class TmdbMovieListPresenter implements MovieListContract.Presenter {
+public class TmdbMovieSearchPresenter implements MovieSearchContract.Presenter {
 
-    MovieListContract.View movieListView;
+    MovieSearchContract.View view;
 
-    public TmdbMovieListPresenter(MovieListContract.View movieListView) {
-        this.movieListView = movieListView;
+    public TmdbMovieSearchPresenter(MovieSearchContract.View view) {
+        this.view = view;
     }
 
     public void findByTitle(String title) {
@@ -20,13 +20,13 @@ public class TmdbMovieListPresenter implements MovieListContract.Presenter {
 
             @Override
             public void onSuccess(TmdbResponse data) {
-                movieListView.setMoviesList(TmdbData.from(data));
-                movieListView.hideLoading();
+                view.setMoviesList(TmdbData.from(data));
+                view.hideLoading();
             }
 
             @Override
             public void onError(ErrorData data) {
-                movieListView.showErrorMessage(data.getMessage());
+                view.showErrorMessage(data.getMessage());
             }
         });
     }

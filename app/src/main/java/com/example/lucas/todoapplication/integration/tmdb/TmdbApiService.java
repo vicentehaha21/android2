@@ -17,5 +17,5 @@ public interface TmdbApiService {
     Call<TmdbMovieResponse> findById(@Path("id") Integer id);
 
     @GET("movie/top_rated?api_key=bc10468769219d89343634c143280e17&language=pt-BR")
-    Call<TmdbResponse> findTopRateds(@Query("i") String id);
+    Call<TmdbResponse> findTopRateds();
 }

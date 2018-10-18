@@ -5,6 +5,7 @@ import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResponse;
 import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResultResponse;
 import com.example.lucas.todoapplication.util.GlobalVars;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,8 +36,8 @@ public class TmdbData extends ResponseData {
         this.overview = overview;
     }
 
-    public static List from(TmdbResponse response) {
-        List<TmdbData> dataList = new ArrayList<>();
+    public static ArrayList from(TmdbResponse response) {
+        ArrayList<TmdbData> dataList = new ArrayList<>();
         for (TmdbResultResponse result : response.getResults()) {
             TmdbData data = new TmdbData(result.getId(), result.getTitle(), result.getPosterPath(), result.getOverview());
             dataList.add(data);

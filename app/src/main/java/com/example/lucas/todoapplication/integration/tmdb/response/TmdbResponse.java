@@ -15,4 +15,8 @@ public class TmdbResponse {
     public List<TmdbResultResponse> getResults() {
         return results;
     }
+
+    public void setResults(List<TmdbResultResponse> results) {
+        this.results = results;
+    }
 }
