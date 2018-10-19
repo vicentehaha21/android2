@@ -1,5 +1,7 @@
 package com.example.lucas.todoapplication.domain;
 
+import android.support.annotation.Nullable;
+
 import com.example.lucas.todoapplication.integration.tmdb.response.TmdbMovieResponse;
 import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResponse;
 import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResultResponse;
@@ -36,7 +38,7 @@ public class TmdbData extends ResponseData {
         this.overview = overview;
     }
 
-    public static ArrayList from(TmdbResponse response) {
+    public static ArrayList<TmdbData> from(@Nullable TmdbResponse response) {
         ArrayList<TmdbData> dataList = new ArrayList<>();
         for (TmdbResultResponse result : response.getResults()) {
             TmdbData data = new TmdbData(result.getId(), result.getTitle(), result.getPosterPath(), result.getOverview());
