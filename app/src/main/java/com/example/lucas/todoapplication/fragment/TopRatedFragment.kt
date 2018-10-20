@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.example.lucas.todoapplication.R
 import com.example.lucas.todoapplication.viewmodel.TopRatedMoviesViewModel
@@ -17,40 +18,35 @@ import io.reactivex.schedulers.Schedulers
 class TopRatedFragment : Fragment() {
 
     val compositeDisposable = CompositeDisposable()
-    lateinit var progressDialog:ProgressDialog
-    lateinit var listView: ListView
+    lateinit var progressDialog: ProgressDialog
+    lateinit var mView: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
-        inflater.inflate(R.layout.top_rateds_fragment, container, false)
+        super.onCreateView(inflater, container, savedInstanceState)
+        mView = inflater.inflate(R.layout.top_rateds_fragment, container, false)
         init()
-        return view
+        return mView
     }
 
     fun init() {
         teste()
     }
 
+
     private fun teste() {
+        val listView = mView.findViewById<ListView>(R.id.topRatedList)
         val topRatedMoviesViewModel = TopRatedMoviesViewModel()
 
         compositeDisposable.add(topRatedMoviesViewModel.loadingState.subscribe { isLoading ->
-            if (isLoading!!) {
-                //                Log.i("LogX", "isLoading");
-                showLoading()
-            } else {
-                //                Log.i("LogX", "isNotLoading");
-                hideLoading()
-            }
+            if (isLoading) showLoading() else hideLoading()
         })
 
         compositeDisposable.add(topRatedMoviesViewModel.topRatedMovies!!
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ items ->
-                    for (item in items) {
-                        Log.i("LogX", item.title)
-                    }
+                    listView.adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1,
+                            items.subList(0, 5).map { item -> item.title })
                 }, { error ->
                     Log.e("LogX", "Erro:")
                     Log.e("LogX", error.message)
