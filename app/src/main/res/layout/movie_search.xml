@@ -21,6 +21,9 @@
             android:src="@drawable/ic_baseline_search_24px"
             android:layout_alignParentEnd="true"/>
 
-        Proc
+        <com.example.lucas.todoapplication.ui.loading.LoadingView
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 </RelativeLayout>

@@ -1,9 +1,9 @@
 package com.example.lucas.todoapplication.repository;
 
-import com.example.lucas.todoapplication.integration.ResponseCallback;
-import com.example.lucas.todoapplication.integration.tmdb.TmdbIntegrationService;
-import com.example.lucas.todoapplication.integration.tmdb.response.TmdbMovieResponse;
-import com.example.lucas.todoapplication.integration.tmdb.response.TmdbResponse;
+import com.example.lucas.todoapplication.repository.integration.ResponseCallback;
+import com.example.lucas.todoapplication.repository.integration.tmdb.TmdbIntegrationService;
+import com.example.lucas.todoapplication.repository.integration.tmdb.response.TmdbMovieResponse;
+import com.example.lucas.todoapplication.repository.integration.tmdb.response.TmdbResponse;
 
 import io.reactivex.Observable;
 

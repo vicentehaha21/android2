@@ -8,7 +8,7 @@
     android:layout_marginBottom="5dp"
     android:background="@color/black">
 
-    <com.example.lucas.todoapplication.component.MovieSearch
+    <com.example.lucas.todoapplication.ui.search.MovieSearch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/moviesSearch"/>

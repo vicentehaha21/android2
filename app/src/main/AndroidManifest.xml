@@ -20,8 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MovieDetailsActivity"/>
-        <activity android:name=".activity.MovieListActivity"/>
+        <activity android:name=".ui.details.MovieDetailsActivity"/>
+        <activity android:name=".ui.list.MovieListActivity"/>
+        <activity android:name=".viewpager.ScreenSlidePagerActivity"/>
     </application>
 
 </manifest>

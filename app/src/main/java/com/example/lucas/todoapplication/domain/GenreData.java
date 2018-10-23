@@ -1,6 +1,6 @@
 package com.example.lucas.todoapplication.domain;
 
-import com.example.lucas.todoapplication.integration.tmdb.response.Genre;
+import com.example.lucas.todoapplication.repository.integration.tmdb.response.Genre;
 
 import java.util.ArrayList;
 import java.util.List;
