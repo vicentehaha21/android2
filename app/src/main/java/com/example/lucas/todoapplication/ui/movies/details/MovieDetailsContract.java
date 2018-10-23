@@ -1,17 +1,15 @@
-package com.example.lucas.todoapplication.ui.search;
+package com.example.lucas.todoapplication.ui.movies.details;
 
 import com.example.lucas.todoapplication.domain.TmdbData;
 
-import java.util.ArrayList;
-
-public interface MovieSearchContract {
+public interface MovieDetailsContract {
 
     interface Presenter {
         public void onViewLoaded();
     }
 
     interface View {
-        void setMoviesList(ArrayList<TmdbData> movies);
+        void setMovie(TmdbData movie);
         void showErrorMessage(String errorMessage);
         void showLoading();
         void hideLoading();

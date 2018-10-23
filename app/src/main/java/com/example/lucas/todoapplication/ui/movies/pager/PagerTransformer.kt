@@ -1,4 +1,4 @@
-package com.example.lucas.todoapplication.viewpager
+package com.example.lucas.todoapplication.ui.movies.pager
 
 import android.support.v4.view.ViewPager
 import android.view.View

@@ -1,4 +1,4 @@
-package com.example.lucas.todoapplication.ui.search;
+package com.example.lucas.todoapplication.ui.component.search;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,16 +10,16 @@ import android.widget.RelativeLayout;
 
 import com.example.lucas.todoapplication.R;
 import com.example.lucas.todoapplication.domain.TmdbData;
-import com.example.lucas.todoapplication.ui.list.MovieListActivity;
-import com.example.lucas.todoapplication.ui.loading.LoadingView;
+import com.example.lucas.todoapplication.ui.movies.list.MovieListActivity;
 import com.example.lucas.todoapplication.util.DialogUtils;
+import com.example.lucas.todoapplication.util.ProgressDialog;
 
 import java.util.ArrayList;
 
 public class MovieSearch extends RelativeLayout implements MovieSearchContract.View {
 
     private Context mContext;
-    private LoadingView loadingView;
+    private ProgressDialog progressDialog;
 
     public MovieSearch(Context context) {
         super(context);
@@ -43,7 +43,8 @@ public class MovieSearch extends RelativeLayout implements MovieSearchContract.V
         inflate(getContext(), R.layout.movie_search, this);
         ImageButton searchButton = findViewById(R.id.searchButton);
         EditText movieSearch = findViewById(R.id.movieSearch);
-        loadingView = findViewById(R.id.loading);
+        progressDialog = new ProgressDialog(mContext);
+
         movieSearch.setOnKeyListener((v, k, e) -> {
             if (k == EditorInfo.IME_ACTION_DONE)
                 search(movieSearch.getText().toString());
@@ -74,11 +75,11 @@ public class MovieSearch extends RelativeLayout implements MovieSearchContract.V
 
     @Override
     public void showLoading() {
-        loadingView.show();
+        progressDialog.show();
     }
 
     @Override
     public void hideLoading() {
-        loadingView.hide();
+        progressDialog.hide();
     }
 }

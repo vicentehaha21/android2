@@ -1,4 +1,4 @@
-package com.example.lucas.todoapplication.ui.details;
+package com.example.lucas.todoapplication.ui.movies.details;
 
 import com.example.lucas.todoapplication.domain.ErrorData;
 import com.example.lucas.todoapplication.domain.TmdbData;

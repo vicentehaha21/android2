@@ -1,4 +1,4 @@
-package com.example.lucas.todoapplication.ui.list;
+package com.example.lucas.todoapplication.ui.movies.list;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

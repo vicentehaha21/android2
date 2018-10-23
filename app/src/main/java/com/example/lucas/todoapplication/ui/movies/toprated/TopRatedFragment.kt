@@ -1,4 +1,4 @@
-package com.example.lucas.todoapplication.ui.toprated
+package com.example.lucas.todoapplication.ui.movies.toprated
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,20 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ListView
 import com.example.lucas.todoapplication.R
-import com.example.lucas.todoapplication.ui.loading.LoadingView
+import com.example.lucas.todoapplication.util.ProgressDialog
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.top_rateds_fragment.*
 
 class TopRatedFragment : Fragment() {
 
     lateinit var mView: View
     val compositeDisposable = CompositeDisposable()
-    lateinit var listView: ListView
     lateinit var topRatedMoviesViewModel: TopRatedMoviesViewModel
-    lateinit var loadingView: LoadingView
+    lateinit var loadingDialog: ProgressDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -30,8 +29,7 @@ class TopRatedFragment : Fragment() {
     }
 
     fun init() {
-        listView = mView.findViewById(R.id.topRatedList)
-        loadingView = mView.findViewById(R.id.loading)
+        loadingDialog = ProgressDialog(context)
         topRatedMoviesViewModel = TopRatedMoviesViewModel()
         watchLoadingState()
         findTopRatedMovies()
@@ -43,7 +41,7 @@ class TopRatedFragment : Fragment() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ items ->
-                    listView.adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1,
+                    topRatedList.adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1,
                             items.subList(0, 5).map { item -> item.title })
                 }, { error ->
                     logError(error)
@@ -64,11 +62,11 @@ class TopRatedFragment : Fragment() {
     }
 
     private fun showLoading() {
-        loadingView.show()
+        loadingDialog.show()
     }
 
     private fun hideLoading() {
-        loadingView.hide()
+        loadingDialog.hide()
     }
 
     private fun logError(error: Throwable) {

@@ -1,5 +1,6 @@
-package com.example.lucas.todoapplication.ui.toprated
+package com.example.lucas.todoapplication.ui.movies.toprated
 
+import android.util.Log
 import com.example.lucas.todoapplication.domain.TmdbData
 import com.example.lucas.todoapplication.repository.TmdbRepository
 import io.reactivex.Observable
@@ -12,6 +13,7 @@ class TopRatedMoviesViewModel {
 
     val topRatedMovies: Observable<java.util.ArrayList<TmdbData>>?
         get() {
+            Log.i("LogX", "Querying for top rated movies")
             loadingStateObservable.onNext(true)
             return tmdbRepository.topRates
                     .map { r -> TmdbData.from(r) }

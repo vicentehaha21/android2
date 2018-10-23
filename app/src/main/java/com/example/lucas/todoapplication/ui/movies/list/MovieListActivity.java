@@ -1,4 +1,4 @@
-package com.example.lucas.todoapplication.ui.list;
+package com.example.lucas.todoapplication.ui.movies.list;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.lucas.todoapplication.R;
 import com.example.lucas.todoapplication.domain.TmdbData;
-import com.example.lucas.todoapplication.ui.details.MovieDetailsActivity;
+import com.example.lucas.todoapplication.ui.movies.details.MovieDetailsActivity;
 import com.example.lucas.todoapplication.util.DialogUtils;
 
 import java.util.ArrayList;

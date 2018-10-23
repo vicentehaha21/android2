@@ -1,4 +1,4 @@
-package com.example.lucas.todoapplication.ui.search;
+package com.example.lucas.todoapplication.ui.component.search;
 
 import com.example.lucas.todoapplication.domain.ErrorData;
 import com.example.lucas.todoapplication.domain.TmdbData;

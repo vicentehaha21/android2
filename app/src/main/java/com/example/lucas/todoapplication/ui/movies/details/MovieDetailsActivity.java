@@ -1,4 +1,4 @@
-package com.example.lucas.todoapplication.ui.details;
+package com.example.lucas.todoapplication.ui.movies.details;
 
 import android.content.Context;
 import android.os.Bundle;
