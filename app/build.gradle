@@ -89,16 +89,16 @@ spoon {
 }
 
 // for integration test of this plugin
-check << {
-    println "Checking spoon tasks..."
-    assert project.tasks.spoon != null
-    assert project.tasks.spoonFreeDebugTest != null
-    assert project.tasks.spoonProDebugTest != null
-
-    assert project.tasks.spoonFreeDebugTest.debug
-//    assert "$project.tasks.spoonFreeDebugTest.output".startsWith("/spoon-reports")
-
-    assert project.tasks.spoonFreeDebugTest.codeCoverage
-
-    println "SUCCESS"
-}
+//check << {
+//    println "Checking spoon tasks..."
+//    assert project.tasks.spoon != null
+//    assert project.tasks.spoonFreeDebugTest != null
+//    assert project.tasks.spoonProDebugTest != null
+//
+//    assert project.tasks.spoonFreeDebugTest.debug
+////    assert "$project.tasks.spoonFreeDebugTest.output".startsWith("/spoon-reports")
+//
+//    assert project.tasks.spoonFreeDebugTest.codeCoverage
+//
+//    println "SUCCESS"
+//}
