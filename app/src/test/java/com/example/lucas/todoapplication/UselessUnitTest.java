@@ -13,10 +13,6 @@ import org.junit.runner.RunWith;
  */
 @RunWith(AndroidJUnit4.class)
 public class UselessUnitTest {
-    @Test
-    public void uselessFailureTest() {
-        Assert.assertEquals(2L, 1L);
-    }
 
     @Test
     public void uselessSuccessTest() {
