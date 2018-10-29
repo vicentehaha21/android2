@@ -45,7 +45,7 @@ class TopRatedFragment : Fragment() {
                             items.subList(0, 5).map { item -> item.title })
                 }, { error ->
                     logError(error)
-                }, { Log.i("LogX", "Finalizou") }))
+                }))
     }
 
     private fun watchLoadingState() {
