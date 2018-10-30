@@ -10,8 +10,8 @@ android {
         applicationId "com.example.lucas.todoapplication"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 59
-        versionName "v0.0.59"
+        versionCode 61
+        versionName "v0.0.61"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
