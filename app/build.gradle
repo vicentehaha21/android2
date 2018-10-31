@@ -10,8 +10,8 @@ android {
         applicationId "com.example.lucas.todoapplication"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 10
+        versionName "v1.1.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -43,10 +43,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.dagger:dagger-android:2.17'
-    implementation 'com.google.dagger:dagger-android-support:2.17' // if you use the support libraries
+    implementation 'com.google.dagger:dagger-android-support:2.17'
+    // if you use the support libraries
     implementation "io.reactivex.rxjava2:rxjava:2.2.2"
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
@@ -61,44 +62,28 @@ repositories {
     mavenCentral()
 }
 
-spoon {
-
-    // Enable debug output
-    debug = true
-
-
-    // Enable setting test class/method-to-be-run from command line. E.g.:
-    // $> ../gradlew spoonFreeDebugTest -PspoonClassName=com.stanfy.spoon.example.test.MainActivityTest -PspoonMethodName=testSetText
-    if (project.hasProperty('spoonClassName')) {
-        className = project.spoonClassName
-
-        if (project.hasProperty('spoonMethodName')) {
-            methodName = project.spoonMethodName
-        }
+task incrementVersions {
+    println project.hasProperty('shouldIncrementMinor')
+    Map versionMap = getVersionMap()
+    versionMap['buildVersion'] = versionMap['buildVersion'].toInteger() + 1
+    if(project.hasProperty('shouldIncrementMinor')) {
+        versionMap['minorVersion'] = versionMap['minorVersion'].toInteger() + 1
     }
-
-    // It's also possible to configure tests sharding using convenient properties:
-    // numShards = 2
-    // shardIndex = 0
-
-    adbTimeout = 30
-
-    codeCoverage = true
-
-    grantAllPermissions = true
+    buildFile.setText(updateBuildFile(versionMap))
 }
 
-// for integration test of this plugin
-//check << {
-//    println "Checking spoon tasks..."
-//    assert project.tasks.spoon != null
-//    assert project.tasks.spoonFreeDebugTest != null
-//    assert project.tasks.spoonProDebugTest != null
-//
-//    assert project.tasks.spoonFreeDebugTest.debug
-////    assert "$project.tasks.spoonFreeDebugTest.output".startsWith("/spoon-reports")
-//
-//    assert project.tasks.spoonFreeDebugTest.codeCoverage
-//
-//    println "SUCCESS"
-//}
+String formatVersionName(versionMap) {
+    return String.format('v%s.%s.%s', versionMap['majorVersion'], versionMap['minorVersion'], versionMap['buildVersion'])
+}
+
+Map getVersionMap() {
+    String versionName = android.defaultConfig.versionName
+    String[] versionInfos = versionName.replace("v", "").split("\\.")
+    return ['majorVersion': versionInfos[0], minorVersion: versionInfos[1], buildVersion: versionInfos[2]]
+}
+
+def updateBuildFile(versionMap) {
+    buildFile.getText()
+            .replaceFirst("versionCode.*", 'versionCode ' + versionMap['buildVersion'])
+            .replaceFirst("versionName.*", 'versionName "' + formatVersionName(versionMap) + '"')
+}
