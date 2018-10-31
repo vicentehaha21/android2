@@ -10,8 +10,8 @@ android {
         applicationId "com.example.lucas.todoapplication"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 10
-        versionName "v1.1.10"
+        versionCode 12
+        versionName "v1.3.12"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -63,13 +63,15 @@ repositories {
 }
 
 task incrementVersions {
-    println project.hasProperty('shouldIncrementMinor')
     Map versionMap = getVersionMap()
     versionMap['buildVersion'] = versionMap['buildVersion'].toInteger() + 1
     if(project.hasProperty('shouldIncrementMinor')) {
         versionMap['minorVersion'] = versionMap['minorVersion'].toInteger() + 1
     }
-    buildFile.setText(updateBuildFile(versionMap))
+//    buildFile.setText(updateBuildFile(versionMap))
+    doLast {
+        println formatVersionName(versionMap)
+    }
 }
 
 String formatVersionName(versionMap) {
