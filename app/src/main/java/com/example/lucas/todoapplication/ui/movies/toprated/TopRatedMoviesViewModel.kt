@@ -22,5 +22,4 @@ class TopRatedMoviesViewModel {
 
     val loadingState: Observable<Boolean>
         get() = loadingStateObservable
-
 }

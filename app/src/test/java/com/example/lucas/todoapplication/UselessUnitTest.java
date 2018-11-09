@@ -1,5 +1,6 @@
 package com.example.lucas.todoapplication;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -7,8 +8,10 @@ import org.junit.Test;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class UselessUnitTest {
+
     @Test
-    public void testFindByName() {
+    public void uselessSuccessTest() {
+        Assert.assertEquals(2L, 2L);
     }
 }

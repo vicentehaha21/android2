@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.lucas.todoapplication">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -20,9 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.movies.details.MovieDetailsActivity"/>
-        <activity android:name=".ui.movies.list.MovieListActivity"/>
-        <activity android:name="com.example.lucas.todoapplication.ui.movies.pager.ScreenSlideFragment"/>
+        <activity android:name=".ui.movies.details.MovieDetailsActivity" />
+        <activity android:name=".ui.movies.list.MovieListActivity" />
     </application>
 
 </manifest>
